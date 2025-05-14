@@ -22,10 +22,10 @@ spec:
         value: leogues/video-chat-backend
       - name: service.port
         value: '8080'
-      - name: livenessProbe.httpGet.path
-        value: /healthz
-      - name: readinessProbe.httpGet.path
-        value: /healthz
+      # - name: livenessProbe.httpGet.path
+      #   value: /healthz
+      # - name: readinessProbe.httpGet.path
+      #   value: /healthz
       - name: image.tag
         value: "46"
       - name: autoscaling.enabled
