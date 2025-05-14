@@ -35,7 +35,7 @@ spec:
       - name: autoscaling.maxReplicas
         value: "1"
     path: helm-charts/live-link
-    repoURL: git@github.com:leogues/infra.git
+    repoURL: git@github.com:leogues/k3s-gitops.git
     targetRevision: main
   syncPolicy:
     automated:
