@@ -3,7 +3,7 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd-image-updater.argoproj.io/image-list: live-link-backend=leogues/live-link-backend
+    argocd-image-updater.argoproj.io/image-list: live-link-backend=leogues/video-chat-backend
     argocd-image-updater.argoproj.io/live-link-backend.update-strategy: semver
     argocd-image-updater.argoproj.io/write-back-method: git
   finalizers:
@@ -19,7 +19,7 @@ spec:
     helm:
       parameters:
       - name: image.repository
-        value: leogues/live-link-backend
+        value: leogues/video-chat-backend
       - name: service.port
         value: '8080'
       - name: livenessProbe.httpGet.path
