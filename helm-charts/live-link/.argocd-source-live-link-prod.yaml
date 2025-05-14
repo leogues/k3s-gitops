@@ -1,0 +1,23 @@
+helm:
+  parameters:
+  - name: image.repository
+    value: leogues/video-chat-backend
+    forcestring: false
+  - name: service.port
+    value: "8080"
+    forcestring: false
+  - name: image.tag
+    value: "47"
+    forcestring: true
+  - name: autoscaling.enabled
+    value: "true"
+    forcestring: false
+  - name: autoscaling.minReplicas
+    value: "1"
+    forcestring: false
+  - name: autoscaling.maxReplicas
+    value: "1"
+    forcestring: false
+  - name: image.name
+    value: leogues/video-chat-backend
+    forcestring: true
