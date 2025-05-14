@@ -1,0 +1,49 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: live-link-backend=leogues/live-link-backend
+    argocd-image-updater.argoproj.io/live-link-backend.update-strategy: semver
+    argocd-image-updater.argoproj.io/write-back-method: git
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io/background
+  name: live-link-prod
+  namespace: argocd
+spec:
+  destination:
+    namespace: prod
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      parameters:
+      - name: image.repository
+        value: leogues/live-link-backend
+      - name: service.port
+        value: '8080'
+      - name: livenessProbe.httpGet.path
+        value: /healthz
+      - name: readinessProbe.httpGet.path
+        value: /healthz
+      - name: image.tag
+        value: "46"
+      - name: autoscaling.enabled
+        value: "true"
+      - name: autoscaling.minReplicas
+        value: "1"
+      - name: autoscaling.maxReplicas
+        value: "1"
+    path: helm-charts/live-link
+    repoURL: git@github.com:leogues/infra.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      allowEmpty: false
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - Validate=true
+    - CreateNamespace=true
+    - PrunePropagationPolicy=foreground
+    - PruneLast=true
