@@ -42,9 +42,9 @@ spec:
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           envFrom:
             - configMapRef:
-                name: {{ include "live-link.fullname" . }}-config
+                name: {{ .Values.env.configMapName }}
             - secretRef:
-                name: {{ include "live-link.fullname" . }}-secret
+                name: {{ .Values.env.secretName }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

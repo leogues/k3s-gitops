@@ -121,3 +121,7 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+env:
+  configMapName: live-link-config
+  secretName: live-link-secret
