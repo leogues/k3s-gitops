@@ -34,6 +34,22 @@ spec:
         value: "1"
       - name: autoscaling.maxReplicas
         value: "1"
+      - name: ingress.enabled
+        value: "true"
+      - name: ingress.className
+        value: "traefik"
+      - name: ingress.annotations.cert-manager\.io/cluster-issuer
+        value: "letsencrypt-prod"
+      - name: ingress.hosts[0].host
+        value: "live.leogues.com.br"
+      - name: ingress.hosts[0].paths[0].path
+        value: "/api/"
+      - name: ingress.hosts[0].paths[0].pathType
+        value: "Prefix"
+      - name: ingress.tls[0].secretName
+        value: "live-leogues-tls"
+      - name: ingress.tls[0].hosts[0]
+        value: "live.leogues.com.br"
     path: helm-charts/live-link
     repoURL: git@github.com:leogues/k3s-gitops.git
     targetRevision: main
