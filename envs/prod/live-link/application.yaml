@@ -27,7 +27,7 @@ spec:
       - name: readinessProbe
         value: null
       - name: image.tag
-        value: "46"
+        value: "47"
       - name: autoscaling.enabled
         value: "true"
       - name: autoscaling.minReplicas
@@ -39,7 +39,7 @@ spec:
       - name: ingress.className
         value: "traefik"
       - name: ingress.annotations.cert-manager\.io/cluster-issuer
-        value: "letsencrypt-prod"
+        value: "cloudflare-clusterissuer"
       - name: ingress.hosts[0].host
         value: "live.leogues.com.br"
       - name: ingress.hosts[0].paths[0].path
@@ -47,7 +47,7 @@ spec:
       - name: ingress.hosts[0].paths[0].pathType
         value: "Prefix"
       - name: ingress.tls[0].secretName
-        value: "live-leogues-tls"
+        value: "traefik-cert-secret"
       - name: ingress.tls[0].hosts[0]
         value: "live.leogues.com.br"
     path: helm-charts/live-link
