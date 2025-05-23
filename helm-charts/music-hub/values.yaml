@@ -123,5 +123,5 @@ tolerations: []
 affinity: {}
 
 env:
-  configMapName: live-link-config
-  secretName: live-link-secret
+  configMapName: music-hub-config
+  secretName: music-hub-secret
