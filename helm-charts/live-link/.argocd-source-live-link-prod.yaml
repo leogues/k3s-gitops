@@ -1,0 +1,53 @@
+helm:
+  parameters:
+  - name: image.repository
+    value: leogues/video-chat-backend
+    forcestring: false
+  - name: service.port
+    value: "8080"
+    forcestring: false
+  - name: livenessProbe
+    value: ""
+    forcestring: false
+  - name: readinessProbe
+    value: ""
+    forcestring: false
+  - name: image.tag
+    value: "47"
+    forcestring: true
+  - name: autoscaling.enabled
+    value: "true"
+    forcestring: false
+  - name: autoscaling.minReplicas
+    value: "1"
+    forcestring: false
+  - name: autoscaling.maxReplicas
+    value: "1"
+    forcestring: false
+  - name: ingress.enabled
+    value: "true"
+    forcestring: false
+  - name: ingress.className
+    value: traefik
+    forcestring: false
+  - name: ingress.annotations.cert-manager\.io/cluster-issuer
+    value: cloudflare-clusterissuer
+    forcestring: false
+  - name: ingress.hosts[0].host
+    value: live.leogues.com.br
+    forcestring: false
+  - name: ingress.hosts[0].paths[0].path
+    value: /api/
+    forcestring: false
+  - name: ingress.hosts[0].paths[0].pathType
+    value: Prefix
+    forcestring: false
+  - name: ingress.tls[0].secretName
+    value: traefik-cert-secret
+    forcestring: false
+  - name: ingress.tls[0].hosts[0]
+    value: live.leogues.com.br
+    forcestring: false
+  - name: image.name
+    value: leogues/video-chat-backend
+    forcestring: true
