@@ -27,7 +27,7 @@ spec:
       - name: readinessProbe
         value: null
       - name: image.tag
-        value: "47"
+        value: "46"
       - name: autoscaling.enabled
         value: "true"
       - name: autoscaling.minReplicas
