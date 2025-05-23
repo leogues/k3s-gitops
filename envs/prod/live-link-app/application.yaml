@@ -20,14 +20,14 @@ spec:
       parameters:
       - name: image.repository
         value: leogues/video-chat-frontend
+      - name: image.tag
+        value: "44"
       - name: service.port
         value: '5173'
       - name: livenessProbe
         value: null
       - name: readinessProbe
         value: null
-      - name: image.tag
-        value: "44"
       - name: autoscaling.enabled
         value: "true"
       - name: autoscaling.maxReplicas

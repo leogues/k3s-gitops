@@ -3,12 +3,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd-image-updater.argoproj.io/image-list: live-link-backend=leogues/video-chat-backend
-    argocd-image-updater.argoproj.io/live-link-backend.update-strategy: semver
+    argocd-image-updater.argoproj.io/image-list: portfolio-frontend=leogues/portfolio-frontend
+    argocd-image-updater.argoproj.io/portfolio-frontend.update-strategy: semver
     argocd-image-updater.argoproj.io/write-back-method: git
   finalizers:
   - resources-finalizer.argocd.argoproj.io/background
-  name: live-link-prod
+  name: portfolio-app-prod
   namespace: argocd
 spec:
   destination:
@@ -19,11 +19,11 @@ spec:
     helm:
       parameters:
       - name: image.repository
-        value: leogues/video-chat-backend
+        value: leogues/portfolio-frontend
       - name: image.tag
-        value: "46"
+        value: "25"
       - name: service.port
-        value: '8080'
+        value: '4200'
       - name: livenessProbe
         value: null
       - name: readinessProbe
@@ -39,16 +39,16 @@ spec:
       - name: ingress.annotations.cert-manager\.io/cluster-issuer
         value: "cloudflare-clusterissuer"
       - name: ingress.hosts[0].host
-        value: "live.leogues.com.br"
+        value: "leogues.com.br"
       - name: ingress.hosts[0].paths[0].path
-        value: "/api/"
+        value: "/"
       - name: ingress.hosts[0].paths[0].pathType
         value: "Prefix"
       - name: ingress.tls[0].secretName
         value: "traefik-cert-secret"
       - name: ingress.tls[0].hosts[0]
-        value: "live.leogues.com.br"
-    path: helm-charts/live-link
+        value: "leogues.com.br"
+    path: helm-charts/portfolio-app
     repoURL: https://github.com/leogues/k3s-gitops.git
     targetRevision: main
   syncPolicy:
