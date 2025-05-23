@@ -1,0 +1,68 @@
+---
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  annotations:
+    argocd-image-updater.argoproj.io/image-list: music-hub-frontend=leogues/music-hub-frontend
+    argocd-image-updater.argoproj.io/music-hub-frontend.update-strategy: semver
+    argocd-image-updater.argoproj.io/write-back-method: git
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io/background
+  name: music-hub-app-prod
+  namespace: argocd
+spec:
+  destination:
+    namespace: prod
+    server: https://kubernetes.default.svc
+  project: default
+  source:
+    helm:
+      parameters:
+      #Deployment
+      - name: image.repository
+        value: leogues/music-hub-frontend
+      - name: image.tag
+        value: "24"
+      - name: service.port
+        value: '8080'
+      - name: livenessProbe
+        value: null
+      - name: readinessProbe
+        value: null
+
+      #Autoscaling
+      - name: autoscaling.enabled
+        value: "true"
+      - name: autoscaling.maxReplicas
+        value: "2"
+        
+      #Ingress
+      - name: ingress.enabled
+        value: "true"
+      - name: ingress.className
+        value: "traefik"
+      - name: ingress.annotations.cert-manager\.io/cluster-issuer
+        value: "cloudflare-clusterissuer"
+      - name: ingress.hosts[0].host
+        value: "music.leogues.com.br"
+      - name: ingress.hosts[0].paths[0].path
+        value: "/"
+      - name: ingress.hosts[0].paths[0].pathType
+        value: "Prefix"
+      - name: ingress.tls[0].secretName
+        value: "traefik-cert-secret"
+      - name: ingress.tls[0].hosts[0]
+        value: "music.leogues.com.br"
+    path: helm-charts/music-hub-app
+    repoURL: https://github.com/leogues/k3s-gitops.git
+    targetRevision: main
+  syncPolicy:
+    automated:
+      allowEmpty: false
+      prune: true
+      selfHeal: true
+    syncOptions:
+    - Validate=true
+    - CreateNamespace=true
+    - PrunePropagationPolicy=foreground
+    - PruneLast=true
