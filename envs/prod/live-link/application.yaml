@@ -51,7 +51,7 @@ spec:
       - name: ingress.tls[0].hosts[0]
         value: "live.leogues.com.br"
     path: helm-charts/live-link
-    repoURL: git@github.com:leogues/k3s-gitops.git
+    repoURL: https://github.com/leogues/k3s-gitops.git
     targetRevision: main
   syncPolicy:
     automated:
