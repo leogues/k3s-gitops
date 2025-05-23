@@ -3,12 +3,12 @@ apiVersion: argoproj.io/v1alpha1
 kind: Application
 metadata:
   annotations:
-    argocd-image-updater.argoproj.io/image-list: portfolio-frontend=leogues/portfolio-frontend
-    argocd-image-updater.argoproj.io/portfolio-frontend.update-strategy: semver
+    argocd-image-updater.argoproj.io/image-list: music-hub-backend=leogues/music-hub-backend
+    argocd-image-updater.argoproj.io/music-hub-backend.update-strategy: semver
     argocd-image-updater.argoproj.io/write-back-method: git
   finalizers:
   - resources-finalizer.argocd.argoproj.io/background
-  name: portfolio-app-prod
+  name: music-hub-prod
   namespace: argocd
 spec:
   destination:
@@ -20,11 +20,11 @@ spec:
       parameters:
       #Deployment
       - name: image.repository
-        value: leogues/portfolio-frontend
+        value: leogues/music-hub-backend
       - name: image.tag
-        value: "25"
+        value: "24"
       - name: service.port
-        value: '4200'
+        value: '8080'
       - name: livenessProbe
         value: null
       - name: readinessProbe
@@ -35,7 +35,7 @@ spec:
         value: "true"
       - name: autoscaling.maxReplicas
         value: "2"
-
+        
       #Ingress
       - name: ingress.enabled
         value: "true"
@@ -44,24 +44,16 @@ spec:
       - name: ingress.annotations.cert-manager\.io/cluster-issuer
         value: "cloudflare-clusterissuer"
       - name: ingress.hosts[0].host
-        value: "leogues.com.br"
+        value: "music.leogues.com.br"
       - name: ingress.hosts[0].paths[0].path
-        value: "/"
+        value: "/api/"
       - name: ingress.hosts[0].paths[0].pathType
-        value: "Prefix"
-      - name: ingress.hosts[1].host
-        value: "www.leogues.com.br"
-      - name: ingress.hosts[1].paths[0].path
-        value: "/"
-      - name: ingress.hosts[1].paths[0].pathType
         value: "Prefix"
       - name: ingress.tls[0].secretName
         value: "traefik-cert-secret"
       - name: ingress.tls[0].hosts[0]
-        value: "leogues.com.br"
-      - name: ingress.tls[0].hosts[1]
-        value: "www.leogues.com.br"
-    path: helm-charts/portfolio-app
+        value: "music.leogues.com.br"
+    path: helm-charts/music-hub
     repoURL: https://github.com/leogues/k3s-gitops.git
     targetRevision: main
   syncPolicy:

@@ -18,6 +18,7 @@ spec:
   source:
     helm:
       parameters:
+      #Deployment
       - name: image.repository
         value: leogues/video-chat-backend
       - name: image.tag
@@ -28,10 +29,14 @@ spec:
         value: null
       - name: readinessProbe
         value: null
+      
+      #Autoscaling
       - name: autoscaling.enabled
         value: "true"
       - name: autoscaling.maxReplicas
         value: "2"
+        
+      #Ingress
       - name: ingress.enabled
         value: "true"
       - name: ingress.className
