@@ -4,7 +4,7 @@ helm:
     value: leogues/video-chat-frontend
     forcestring: false
   - name: image.tag
-    value: "50"
+    value: "51"
     forcestring: true
   - name: service.port
     value: "5173"
