@@ -13,7 +13,7 @@ helm:
     value: ""
     forcestring: false
   - name: image.tag
-    value: "47"
+    value: "48"
     forcestring: true
   - name: autoscaling.enabled
     value: "true"
